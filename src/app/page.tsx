@@ -18,13 +18,24 @@ export default function Home() {
         setLink(`${window.location.origin}${data.url}`);
     };
 
-    const handleCopy = () => {
-        if (link) {
-            navigator.clipboard.writeText(link);
-            setCopySuccess(true);
-            setTimeout(() => setCopySuccess(false), 3000);
+    const handleCopy = async () => {
+        if (!link) return;
+    
+        try {
+            // ✅ Verificamos permisos antes de copiar
+            const permission = await navigator.permissions.query({ name: "clipboard-write" as PermissionName });
+    
+            if (permission.state === "granted" || permission.state === "prompt") {
+                await navigator.clipboard.writeText(link);
+                setCopySuccess(true);
+                setTimeout(() => setCopySuccess(false), 3000);
+            } else {
+                console.warn("⚠ El navegador ha bloqueado el acceso al portapapeles.");
+            }
+        } catch (error) {
+            console.error("❌ Error al copiar el enlace:", error);
         }
-    };
+    };    
 
     return (
         <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-[#1e1e2e] to-[#181825]">

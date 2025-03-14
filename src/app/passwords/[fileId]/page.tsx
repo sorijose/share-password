@@ -76,7 +76,7 @@ export default function DownloadPage() {
     if (error) {
         return (
             <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-[#1e1e2e] to-[#181825]">
-                <div className="p-6 w-full max-w-lg bg-white/10 backdrop-blur-lg border border-white/20 shadow-2xl rounded-3xl text-white text-center">
+                <div className="p-6 w-full max-w-lg backdrop-blur-lg rounded-3xl text-white text-center">
                     <h1 className="text-2xl font-bold text-red-500">El archivo no existe o ya fue eliminado.</h1>
                 </div>
             </div>
